@@ -120,7 +120,9 @@ CREATE TABLE Equipments (
 );
 
 CREATE TABLE EquipmentInstances (
-  EquipmentID VARCHAR PRIMARY KEY,
+  ID SERIAL PRIMARY KEY ,
+  EquipmentID VARCHAR,
+  Count Int,
   RoomID INT,
   FOREIGN KEY (EquipmentID) REFERENCES Equipments(Code),
   FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID)

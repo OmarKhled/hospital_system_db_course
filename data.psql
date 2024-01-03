@@ -149,19 +149,19 @@ INSERT INTO Equipments (Code, Price, Description) VALUES
 ('EQ013', 800.00, 'Anesthesia Machine'),
 ('EQ014', 900.00, 'Surgical Table');
 
-INSERT INTO EquipmentInstances (EquipmentID, RoomID) VALUES
-('EQ001', 101),
-('EQ002', 102),
-('EQ003', 103),
-('EQ004', 104),
-('EQ005', 105),
-('EQ006', 101),
-('EQ007', 102),
-('EQ008', 103),
-('EQ009', 104),
-('EQ010', 105),
-('EQ011', 101),
-('EQ012', 102),
-('EQ013', 103),
-('EQ014', 104);
+INSERT INTO EquipmentInstances (EquipmentID, RoomID, Count) VALUES
+('EQ001', 101, 2),
+('EQ002', 102, 1),
+('EQ003', 103, 2),
+('EQ004', 104, 1),
+('EQ005', 105, 1),
+('EQ006', 101, 3),
+('EQ007', 102, 1),
+('EQ008', 103, 1),
+('EQ009', 104, 1),
+('EQ010', 105, 1),
+('EQ011', 101, 1),
+('EQ012', 102, 1),
+('EQ013', 103, 1),
+('EQ014', 104, 1);
 
