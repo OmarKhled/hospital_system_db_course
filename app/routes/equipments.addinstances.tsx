@@ -5,7 +5,7 @@ import DynamicForm from "~/components/DynamicForm";
 import { prisma } from "~/db.server";
 
 export async function loader() {
-  return json(await prisma.equipments.findMany());
+  return json(await prisma.equipmentinstances.findMany());
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -17,7 +17,7 @@ export async function action({ request }: ActionFunctionArgs) {
   formData.forEach(function (value, key) {
     console.log();
     // @ts-ignore
-    if (prisma.equipments.fields[key].typeName === "Int") {
+    if (prisma.equipmentinstances.fields[key].typeName === "Int") {
       data[key] = Number(value);
     } else {
       data[key] = value;
@@ -25,9 +25,9 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   // @ts-ignore
-  const Equipments = await prisma.equipments.create({ data });
+  const Equipmentinstances = await prisma.equipmentinstances.create({ data });
 
-  console.log(Equipments);
+  console.log(Equipmentinstances);
   return formData;
 }
 
@@ -45,7 +45,7 @@ const add = () => {
     <>
       <div className="w-3/4 mx-auto">
         <p className="text-left !mb-0 pb-3">Add an equipment</p>
-        <DynamicForm neglect={[]} headers={headers} />
+        <DynamicForm neglect={["id"]} headers={headers} />
       </div>
     </>
   );

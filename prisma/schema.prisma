@@ -48,17 +48,19 @@ model employees {
 }
 
 model equipmentinstances {
-  equipmentid String     @id @db.VarChar
+  id          Int         @id @default(autoincrement())
+  equipmentid String?     @db.VarChar
+  count       Int?
   roomid      Int?
-  equipments  equipments @relation(fields: [equipmentid], references: [code], onDelete: NoAction, onUpdate: NoAction)
-  rooms       rooms?     @relation(fields: [roomid], references: [roomid], onDelete: NoAction, onUpdate: NoAction)
+  equipments  equipments? @relation(fields: [equipmentid], references: [code], onDelete: NoAction, onUpdate: NoAction)
+  rooms       rooms?      @relation(fields: [roomid], references: [roomid], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model equipments {
-  code               String              @id @db.VarChar
-  price              Decimal?            @db.Decimal(10, 2)
-  description        String?             @db.VarChar
-  equipmentinstances equipmentinstances?
+  code               String               @id @db.VarChar
+  price              Decimal?             @db.Decimal(10, 2)
+  description        String?              @db.VarChar
+  equipmentinstances equipmentinstances[]
 }
 
 model medicalrecords {

@@ -52,9 +52,9 @@ export default function Index() {
         </Link>
         <Link
           className="bg-slate-200 border-solid border border-slate-300 text-slate-800 text-slate flex align-middle justify-center px-3 py-3 rounded-lg text no-underline"
-          to="/equipment"
+          to="/equipments"
         >
-          Equipment
+          Equipments
         </Link>
         <Link
           className="bg-slate-200 border-solid border border-slate-300 text-slate-800 text-slate flex align-middle justify-center px-3 py-3 rounded-lg text no-underline"
