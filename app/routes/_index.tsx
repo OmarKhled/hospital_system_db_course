@@ -80,6 +80,12 @@ export default function Index() {
         >
           Records
         </Link>
+        <Link
+          className="bg-slate-200 border-solid border border-slate-300 text-slate-800 text-slate flex align-middle justify-center px-3 py-3 rounded-lg text no-underline"
+          to="/inventory"
+        >
+          Inventory
+        </Link>
       </div>
     </div>
   );

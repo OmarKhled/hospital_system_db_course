@@ -5,7 +5,7 @@ import DynamicForm from "~/components/DynamicForm";
 import { prisma } from "~/db.server";
 
 export async function loader() {
-  return json(await prisma.roomshistory.findMany());
+  return json(await prisma.medicalrecords.findMany());
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -17,7 +17,7 @@ export async function action({ request }: ActionFunctionArgs) {
   formData.forEach(function (value, key) {
     console.log();
     // @ts-ignore
-    if (prisma.roomshistory.fields[key].typeName === "Int") {
+    if (prisma.medicalrecords.fields[key].typeName === "Int") {
       data[key] = Number(value);
     } else {
       data[key] = value;
@@ -25,9 +25,9 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   // @ts-ignore
-  const Room_History = await prisma.roomshistory.create({ data });
+  const MedicalRecords = await prisma.medicalrecords.create({ data });
 
-  console.log(Room_History);
+  console.log(MedicalRecords);
   return formData;
 }
 
@@ -44,8 +44,8 @@ const add = () => {
   return (
     <>
       <div className="w-3/4 mx-auto">
-        <p className="text-left !mb-0 pb-3">Add a patient</p>
-        <DynamicForm neglect={["historyid"]} headers={headers} />
+        <p className="text-left !mb-0 pb-3">Add a record</p>
+        <DynamicForm neglect={["recordid"]} headers={headers} />
       </div>
     </>
   );

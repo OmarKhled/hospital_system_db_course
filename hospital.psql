@@ -50,7 +50,7 @@ CREATE TABLE Receptionists (
 
 -- Medical Records
 CREATE TABLE MedicalRecords (
-  RecordID INT PRIMARY KEY,
+  RecordID SERIAL PRIMARY KEY,
   PatientID VARCHAR,
   DateOfVisit DATE,
   Symptoms TEXT,
@@ -75,8 +75,8 @@ CREATE TABLE Medicine (
   DosageType DOSAGE 
 );
 
-CREATE TABLE Pharmacy (
-  ListingId INT PRIMARY KEY,
+CREATE TABLE Inventory (
+  ListingId SERIAL PRIMARY KEY,
   MedicineId VARCHAR(8),
   Quantity INT,
   DateOfPurchase DATE,
@@ -100,7 +100,6 @@ CREATE TABLE Rooms (
 
 CREATE TYPE ROOM_OCCUPATION_TYPE AS ENUM('PatientOccupancy', 'Maintenance', 'Other');
 
-
 CREATE TABLE RoomsHistory (
   HistoryID INT PRIMARY KEY,
   RoomID INT,
@@ -114,9 +113,9 @@ CREATE TABLE RoomsHistory (
 );
 
 CREATE TABLE Equipments (
-   Code VARCHAR PRIMARY KEY,
-   Price DECIMAL(10, 2),
-   Description VARCHAR
+  Code VARCHAR PRIMARY KEY,
+  Price DECIMAL(10, 2),
+  Description VARCHAR
 );
 
 CREATE TABLE EquipmentInstances (

@@ -8,12 +8,12 @@ datasource db {
 }
 
 model medicine {
-  code        String     @id @db.VarChar(8)
-  name        String?    @db.VarChar
-  price       Decimal?   @db.Decimal(10, 2)
+  code        String      @id @db.VarChar(8)
+  name        String?     @db.VarChar
+  price       Decimal?    @db.Decimal(10, 2)
   description String?
   dosagetype  dosage?
-  pharmacy    pharmacy[]
+  inventory   inventory[]
 }
 
 model departments {
@@ -64,7 +64,7 @@ model equipments {
 }
 
 model medicalrecords {
-  recordid          Int            @id
+  recordid          Int            @id @default(autoincrement())
   patientid         String?        @db.VarChar
   dateofvisit       DateTime?      @db.Date
   symptoms          String?
@@ -103,16 +103,6 @@ model patients {
   roomshistory   roomshistory[]
 }
 
-model pharmacy {
-  listingid           Int       @id
-  medicineid          String?   @db.VarChar(8)
-  quantity            Int?
-  dateofpurchase      DateTime? @db.Date
-  expirydate          DateTime? @db.Date
-  storageinstructions String?
-  medicine            medicine? @relation(fields: [medicineid], references: [code], onDelete: NoAction, onUpdate: NoAction)
-}
-
 model receptionists {
   id             Int              @default(autoincrement())
   name           String?          @db.VarChar
@@ -138,7 +128,7 @@ model rooms {
 }
 
 model roomshistory {
-  historyid Int                   @id
+  historyid Int                   @id @default(autoincrement())
   roomid    Int?
   startdate DateTime?             @db.Date
   enddate   DateTime?             @db.Date
@@ -147,6 +137,16 @@ model roomshistory {
   notes     String?
   patients  patients?             @relation(fields: [patientid], references: [phonenumber], onDelete: NoAction, onUpdate: NoAction)
   rooms     rooms?                @relation(fields: [roomid], references: [roomid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model inventory {
+  listingid           Int       @id @default(autoincrement())
+  medicineid          String?   @db.VarChar(8)
+  quantity            Int?
+  dateofpurchase      DateTime? @db.Date
+  expirydate          DateTime? @db.Date
+  storageinstructions String?
+  medicine            medicine? @relation(fields: [medicineid], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "pharmacy_medicineid_fkey")
 }
 
 enum dosage {

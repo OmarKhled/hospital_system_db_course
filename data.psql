@@ -50,22 +50,21 @@ INSERT INTO Receptionists (ID, Name, Phone, Address, Status, JoinDate, Reception
 -- Add more entries for receptionists...
 (114, 'Receptionist Gary Hill', '555-1014', '909 Elm St', 'ACTIVE', '2019-03-05', 114, 'Main Lobby');
 
-INSERT INTO MedicalRecords (RecordID, PatientID, DateOfVisit, Symptoms, Diagnosis, Treatment, AttendingDoctorID, ReceptionistID, Notes) VALUES
-(1, '100-000-0000', '2023-01-15', 'Cough and fever', 'Common Cold', 'Rest and hydration', 100, 102, 'Follow-up in 5 days'),
-(2, '100-000-0001', '2023-01-18', 'Headache and blurred vision', 'Migraine', 'Prescribed pain relievers', 103, 105, 'Review after 1 week'),
-(3, '100-000-0002', '2023-01-20', 'Chest pain', 'Angina', 'Medication and lifestyle changes', 100, 108, 'Scheduled for stress test'),
-(4, '100-000-0003', '2023-01-22', 'Shortness of breath', 'Asthma', 'Inhaler prescribed', 106, 102, 'Regular check-up in 1 month'),
-(5, '100-000-0004', '2023-01-25', 'Abdominal pain', 'Gastritis', 'Diet modifications and medication', 103, 105, 'Ultrasound scheduled'),
-(6, '100-000-0005', '2023-01-28', 'Joint pain', 'Arthritis', 'Physical therapy and medication', 112, 108, 'Assessment in 6 weeks'),
-(7, '100-000-0006', '2023-02-02', 'Skin rash', 'Eczema', 'Topical creams', 106, 102, 'Follow-up if no improvement'),
-(8, '100-000-0007', '2023-02-05', 'Sore throat and fever', 'Strep Throat', 'Antibiotics prescribed', 100, 105, 'Revisit if symptoms persist'),
-(9, '100-000-0008', '2023-02-08', 'Dizziness and nausea', 'Vertigo', 'Medication and rest', 103, 108, 'ENT consultation recommended'),
-(10, '100-000-0009', '2023-02-10', 'Back pain', 'Muscle strain', 'Pain relief medication', 106, 102, 'Physical therapy suggested'),
-(11, '100-000-0010', '2023-02-12', 'Frequent urination', 'Diabetes', 'Insulin therapy', 112, 105, 'Dietician referral'),
-(12, '100-000-0011', '2023-02-15', 'Persistent cough', 'Bronchitis', 'Antibiotics and cough syrup', 100, 108, 'Chest X-ray done'),
-(13, '100-000-0012', '2023-02-18', 'Severe headache', 'Tension Headache', 'Stress management and medication', 103, 102, 'Neurologist follow-up'),
-(14, '100-000-0013', '2023-02-21', 'Eye irritation', 'Conjunctivitis', 'Antibacterial eye drops', 106, 105, 'Recheck in 3 days');
-
+INSERT INTO MedicalRecords (PatientID, DateOfVisit, Symptoms, Diagnosis, Treatment, AttendingDoctorID, ReceptionistID, Notes) VALUES
+('100-000-0000', '2023-01-15', 'Cough and fever', 'Common Cold', 'Rest and hydration', 100, 102, 'Follow-up in 5 days'),
+('100-000-0001', '2023-01-18', 'Headache and blurred vision', 'Migraine', 'Prescribed pain relievers', 103, 105, 'Review after 1 week'),
+('100-000-0002', '2023-01-20', 'Chest pain', 'Angina', 'Medication and lifestyle changes', 100, 108, 'Scheduled for stress test'),
+('100-000-0003', '2023-01-22', 'Shortness of breath', 'Asthma', 'Inhaler prescribed', 106, 102, 'Regular check-up in 1 month'),
+('100-000-0004', '2023-01-25', 'Abdominal pain', 'Gastritis', 'Diet modifications and medication', 103, 105, 'Ultrasound scheduled'),
+('100-000-0005', '2023-01-28', 'Joint pain', 'Arthritis', 'Physical therapy and medication', 112, 108, 'Assessment in 6 weeks'),
+('100-000-0006', '2023-02-02', 'Skin rash', 'Eczema', 'Topical creams', 106, 102, 'Follow-up if no improvement'),
+('100-000-0007', '2023-02-05', 'Sore throat and fever', 'Strep Throat', 'Antibiotics prescribed', 100, 105, 'Revisit if symptoms persist'),
+('100-000-0008', '2023-02-08', 'Dizziness and nausea', 'Vertigo', 'Medication and rest', 103, 108, 'ENT consultation recommended'),
+('100-000-0009', '2023-02-10', 'Back pain', 'Muscle strain', 'Pain relief medication', 106, 102, 'Physical therapy suggested'),
+('100-000-0010', '2023-02-12', 'Frequent urination', 'Diabetes', 'Insulin therapy', 112, 105, 'Dietician referral'),
+('100-000-0011', '2023-02-15', 'Persistent cough', 'Bronchitis', 'Antibiotics and cough syrup', 100, 108, 'Chest X-ray done'),
+('100-000-0012', '2023-02-18', 'Severe headache', 'Tension Headache', 'Stress management and medication', 103, 102, 'Neurologist follow-up'),
+('100-000-0013', '2023-02-21', 'Eye irritation', 'Conjunctivitis', 'Antibacterial eye drops', 106, 105, 'Recheck in 3 days');
 INSERT INTO Medicine (Code, Name, Price, Description, DosageType) VALUES
 ('MED001', 'Aspirin', 5.99, 'Pain reliever and anti-inflammatory', 'Tablet'),
 ('MED002', 'Ibuprofen', 7.50, 'Pain reliever and fever reducer', 'Tablet'),
@@ -82,21 +81,21 @@ INSERT INTO Medicine (Code, Name, Price, Description, DosageType) VALUES
 ('MED013', 'Hydrochlorothiazide', 6.80, 'Diuretic', 'Tablet'),
 ('MED014', 'Gabapentin', 14.40, 'Seizure and nerve pain medication', 'Capsule');
 
-INSERT INTO Pharmacy (ListingId, MedicineId, Quantity, DateOfPurchase, ExpiryDate, StorageInstructions) VALUES
-(1, 'MED001', 100, '2023-01-01', '2024-01-01', 'Store in a cool, dry place'),
-(2, 'MED002', 150, '2023-01-15', '2024-07-15', 'Store at room temperature'),
-(3, 'MED003', 200, '2023-02-01', '2025-02-01', 'Store in a cool, dry place'),
-(4, 'MED004', 120, '2023-02-20', '2024-08-20', 'Store at room temperature'),
-(5, 'MED005', 100, '2023-03-05', '2025-03-05', 'Store in a cool, dry place'),
-(6, 'MED006', 80, '2023-03-18', '2024-09-18', 'Store at room temperature'),
-(7, 'MED007', 110, '2023-04-10', '2024-10-10', 'Store in a cool, dry place'),
-(8, 'MED008', 90, '2023-05-15', '2025-05-15', 'Store at room temperature'),
-(9, 'MED009', 140, '2023-06-01', '2024-12-01', 'Store in a cool, dry place'),
-(10, 'MED010', 75, '2023-06-20', '2024-06-20', 'Store at room temperature'),
-(11, 'MED011', 60, '2023-07-11', '2025-01-11', 'Store in a cool, dry place'),
-(12, 'MED012', 85, '2023-08-05', '2024-02-05', 'Store at room temperature'),
-(13, 'MED013', 50, '2023-09-10', '2024-03-10', 'Store in a cool, dry place'),
-(14, 'MED014', 70, '2023-10-15', '2025-04-15', 'Store at room temperature');
+INSERT INTO Inventory (MedicineId, Quantity, DateOfPurchase, ExpiryDate, StorageInstructions) VALUES
+('MED001', 100, '2023-01-01', '2024-01-01', 'Store in a cool, dry place'),
+('MED002', 150, '2023-01-15', '2024-07-15', 'Store at room temperature'),
+('MED003', 200, '2023-02-01', '2025-02-01', 'Store in a cool, dry place'),
+('MED004', 120, '2023-02-20', '2024-08-20', 'Store at room temperature'),
+('MED005', 100, '2023-03-05', '2025-03-05', 'Store in a cool, dry place'),
+('MED006', 80, '2023-03-18', '2024-09-18', 'Store at room temperature'),
+('MED007', 110, '2023-04-10', '2024-10-10', 'Store in a cool, dry place'),
+('MED008', 90, '2023-05-15', '2025-05-15', 'Store at room temperature'),
+('MED009', 140, '2023-06-01', '2024-12-01', 'Store in a cool, dry place'),
+( 'MED010', 75, '2023-06-20', '2024-06-20', 'Store at room temperature'),
+( 'MED011', 60, '2023-07-11', '2025-01-11', 'Store in a cool, dry place'),
+( 'MED012', 85, '2023-08-05', '2024-02-05', 'Store at room temperature'),
+( 'MED013', 50, '2023-09-10', '2024-03-10', 'Store in a cool, dry place'),
+( 'MED014', 70, '2023-10-15', '2025-04-15', 'Store at room temperature');
 
 CREATE TYPE ROOM_TYPE AS ENUM('General', 'ICU', 'Surgery', 'Private', 'Others');
 INSERT INTO Rooms (RoomID, RoomType, Location, Capacity, CurrentStatus, AssignedNurse) VALUES
@@ -116,22 +115,22 @@ INSERT INTO Rooms (RoomID, RoomType, Location, Capacity, CurrentStatus, Assigned
 (114, 'Others', 'Building F - Floor 2', 2, 'Occupied', 110);
 
 INSERT INTO RoomsHistory (HistoryID, RoomID, StartDate, EndDate, UsageType, PatientID, Notes) VALUES
-(1, 101, '2023-01-01', '2023-01-10', 'PatientOccupancy', '100-000-0000', 'Routine hospital stay'),
-(2, 101, '2023-01-12', '2023-01-20', 'PatientOccupancy', '100-000-0001', 'Post-surgery recovery'),
-(3, 102, '2023-01-05', '2023-01-15', 'PatientOccupancy', '100-000-0002', 'Intensive care unit stay'),
-(4, 103, '2023-01-10', '2023-01-18', 'PatientOccupancy', '100-000-0003', 'Observation and treatment'),
-(5, 104, '2023-01-02', '2023-01-09', 'PatientOccupancy', '100-000-0004', 'Maternity stay'),
-(6, 105, '2023-01-15', '2023-01-23', 'PatientOccupancy', '100-000-0005', 'Pediatric care'),
-(7, 101, '2023-01-22', '2023-01-30', 'PatientOccupancy', '100-000-0006', 'General medical care'),
-(8, 102, '2023-01-18', '2023-01-28', 'PatientOccupancy', '100-000-0007', 'Critical care after accident'),
-(9, 103, '2023-01-20', '2023-01-27', 'PatientOccupancy', '100-000-0008', 'Short-term care post-operation'),
-(10, 104, '2023-01-11', '2023-01-19', 'PatientOccupancy', '100-000-0009', 'Elderly patient care'),
-(11, 105, '2023-01-25', '2023-02-02', 'PatientOccupancy', '100-000-0010', 'Neonatal care'),
-(12, 101, '2023-02-01', '2023-02-10', 'Maintenance', NULL, 'Room maintenance and cleaning'),
-(13, 102, '2023-01-30', '2023-02-07', 'Maintenance', NULL, 'Equipment upgrade and cleaning'),
-(14, 103, '2023-01-29', '2023-02-05', 'Maintenance', NULL, 'Routine cleaning and sterilization'),
-(15, 104, '2023-01-21', '2023-01-28', 'PatientOccupancy', '100-000-0011', 'Postpartum care'),
-(16, 105, '2023-02-04', '2023-02-11', 'PatientOccupancy', '100-000-0012', 'Child care and observation');
+(101, '2023-01-01', '2023-01-10', 'PatientOccupancy', '100-000-0000', 'Routine hospital stay'),
+(101, '2023-01-12', '2023-01-20', 'PatientOccupancy', '100-000-0001', 'Post-surgery recovery'),
+(102, '2023-01-05', '2023-01-15', 'PatientOccupancy', '100-000-0002', 'Intensive care unit stay'),
+(103, '2023-01-10', '2023-01-18', 'PatientOccupancy', '100-000-0003', 'Observation and treatment'),
+(104, '2023-01-02', '2023-01-09', 'PatientOccupancy', '100-000-0004', 'Maternity stay'),
+(105, '2023-01-15', '2023-01-23', 'PatientOccupancy', '100-000-0005', 'Pediatric care'),
+(101, '2023-01-22', '2023-01-30', 'PatientOccupancy', '100-000-0006', 'General medical care'),
+(102, '2023-01-18', '2023-01-28', 'PatientOccupancy', '100-000-0007', 'Critical care after accident'),
+(103, '2023-01-20', '2023-01-27', 'PatientOccupancy', '100-000-0008', 'Short-term care post-operation'),
+( 104, '2023-01-11', '2023-01-19', 'PatientOccupancy', '100-000-0009', 'Elderly patient care'),
+( 105, '2023-01-25', '2023-02-02', 'PatientOccupancy', '100-000-0010', 'Neonatal care'),
+( 101, '2023-02-01', '2023-02-10', 'Maintenance', NULL, 'Room maintenance and cleaning'),
+( 102, '2023-01-30', '2023-02-07', 'Maintenance', NULL, 'Equipment upgrade and cleaning'),
+( 103, '2023-01-29', '2023-02-05', 'Maintenance', NULL, 'Routine cleaning and sterilization'),
+( 104, '2023-01-21', '2023-01-28', 'PatientOccupancy', '100-000-0011', 'Postpartum care'),
+( 105, '2023-02-04', '2023-02-11', 'PatientOccupancy', '100-000-0012', 'Child care and observation');
 
 INSERT INTO Equipments (Code, Price, Description) VALUES
 ('EQ001', 2000.00, 'ECG Machine'),
