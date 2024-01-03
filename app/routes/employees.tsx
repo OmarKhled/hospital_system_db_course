@@ -1,6 +1,6 @@
 import { Link, Outlet } from "@remix-run/react";
 
-const Patients = () => {
+const Employees = () => {
   return (
     <div className="prose lg:prose-xl w-full">
       <h1 className="mx-auto text-center pt-12 !mb-0 pb-0">
@@ -38,4 +38,4 @@ const Patients = () => {
   );
 };
 
-export default Patients;
+export default Employees;

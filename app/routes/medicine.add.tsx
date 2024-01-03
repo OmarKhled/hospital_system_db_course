@@ -5,7 +5,7 @@ import DynamicForm from "~/components/DynamicForm";
 import { prisma } from "~/db.server";
 
 export async function loader() {
-  return json(await prisma.patients.findMany());
+  return json(await prisma.medicine.findMany());
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -17,7 +17,7 @@ export async function action({ request }: ActionFunctionArgs) {
   formData.forEach(function (value, key) {
     console.log();
     // @ts-ignore
-    if (prisma.patients.fields[key].typeName === "Int") {
+    if (prisma.medicine.fields[key].typeName === "Int") {
       data[key] = Number(value);
     } else {
       data[key] = value;
@@ -25,9 +25,9 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   // @ts-ignore
-  const Patients = await prisma.patients.create({ data });
+  const Medicines= await prisma.medicine.create({ data });
 
-  console.log(Patients);
+  console.log(Medicines);
   return formData;
 }
 
@@ -44,7 +44,7 @@ const add = () => {
   return (
     <>
       <div className="w-3/4 mx-auto">
-        <p className="text-left !mb-0 pb-3">Add a patient</p>
+        <p className="text-left !mb-0 pb-3">Add a medicine</p>
         <DynamicForm headers={headers} neglect={[]} />
       </div>
     </>
