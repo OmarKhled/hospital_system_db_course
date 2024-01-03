@@ -44,7 +44,7 @@ const add = () => {
   return (
     <>
       <div className="w-3/4 mx-auto">
-        <p className="text-left !mb-0 pb-3">Add a patient</p>
+        <p className="text-left !mb-0 pb-3">Add a Rooms</p>
         <DynamicForm neglect={[]} headers={headers} />
       </div>
     </>

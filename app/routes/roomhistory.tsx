@@ -4,7 +4,7 @@ const roomhistory = () => {
   return (
     <div className="prose lg:prose-xl w-full">
       <h1 className="mx-auto text-center pt-12 !mb-0 pb-0">
-        Show Rooms History
+         Rooms History Management
       </h1>
       <div className="grid grid-cols-2 mx-auto w-2/4 mt-5 gap-4">
         <Link

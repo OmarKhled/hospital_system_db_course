@@ -1,6 +1,6 @@
 import { Link, Outlet } from "@remix-run/react";
 
-const roomhistory = () => {
+const inventory = () => {
   return (
     <div className="prose lg:prose-xl w-full">
       <h1 className="mx-auto text-center pt-12 !mb-0 pb-0">Records Entries</h1>
@@ -24,4 +24,4 @@ const roomhistory = () => {
   );
 };
 
-export default roomhistory;
+export default inventory;
