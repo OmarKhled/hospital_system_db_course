@@ -1,0 +1,182 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model medicine {
+  code        String     @id @db.VarChar(8)
+  name        String?    @db.VarChar
+  price       Decimal?   @db.Decimal(10, 2)
+  description String?
+  dosagetype  dosage?
+  pharmacy    pharmacy[]
+}
+
+model departments {
+  id      Int       @id
+  name    String?   @db.VarChar
+  doctors doctors[]
+  nurses  nurses[]
+}
+
+model doctors {
+  id             Int              @default(autoincrement())
+  name           String?          @db.VarChar
+  phone          String?          @db.VarChar
+  address        String?          @db.VarChar
+  status         status?
+  joindate       DateTime?        @default(now()) @db.Date
+  doctorid       Int              @id @default(autoincrement())
+  specialty      String?          @db.VarChar
+  departmentid   Int?
+  departments    departments?     @relation(fields: [departmentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  medicalrecords medicalrecords[]
+}
+
+/// This table has subclasses and requires additional setup for migrations. Visit https://pris.ly/d/table-inheritance for more info.
+model employees {
+  id       Int       @id @default(autoincrement())
+  name     String?   @db.VarChar
+  phone    String?   @db.VarChar
+  address  String?   @db.VarChar
+  status   status?
+  joindate DateTime? @default(now()) @db.Date
+}
+
+model equipmentinstances {
+  equipmentid String     @id @db.VarChar
+  roomid      Int?
+  equipments  equipments @relation(fields: [equipmentid], references: [code], onDelete: NoAction, onUpdate: NoAction)
+  rooms       rooms?     @relation(fields: [roomid], references: [roomid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model equipments {
+  code               String              @id @db.VarChar
+  price              Decimal?            @db.Decimal(10, 2)
+  description        String?             @db.VarChar
+  equipmentinstances equipmentinstances?
+}
+
+model medicalrecords {
+  recordid          Int            @id
+  patientid         String?        @db.VarChar
+  dateofvisit       DateTime?      @db.Date
+  symptoms          String?
+  diagnosis         String?
+  treatment         String?
+  attendingdoctorid Int?
+  receptionistid    Int?
+  notes             String?
+  doctors           doctors?       @relation(fields: [attendingdoctorid], references: [doctorid], onDelete: NoAction, onUpdate: NoAction)
+  patients          patients?      @relation(fields: [patientid], references: [phonenumber], onDelete: NoAction, onUpdate: NoAction)
+  receptionists     receptionists? @relation(fields: [receptionistid], references: [receptionistid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model nurses {
+  id            Int          @default(autoincrement())
+  name          String?      @db.VarChar
+  phone         String?      @db.VarChar
+  address       String?      @db.VarChar
+  status        status?
+  joindate      DateTime?    @default(now()) @db.Date
+  nurseid       Int          @id @default(autoincrement())
+  certification String?      @db.VarChar
+  departmentid  Int?
+  departments   departments? @relation(fields: [departmentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  rooms         rooms[]
+}
+
+model patients {
+  phonenumber    String           @id @db.VarChar
+  name           String?          @db.VarChar
+  city           String?          @db.VarChar
+  address        String?          @db.VarChar
+  sex            String?          @db.VarChar
+  age            Int?
+  medicalrecords medicalrecords[]
+  roomshistory   roomshistory[]
+}
+
+model pharmacy {
+  listingid           Int       @id
+  medicineid          String?   @db.VarChar(8)
+  quantity            Int?
+  dateofpurchase      DateTime? @db.Date
+  expirydate          DateTime? @db.Date
+  storageinstructions String?
+  medicine            medicine? @relation(fields: [medicineid], references: [code], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model receptionists {
+  id             Int              @default(autoincrement())
+  name           String?          @db.VarChar
+  phone          String?          @db.VarChar
+  address        String?          @db.VarChar
+  status         status?
+  joindate       DateTime?        @default(now()) @db.Date
+  receptionistid Int              @id @default(autoincrement())
+  desklocation   String?          @db.VarChar
+  medicalrecords medicalrecords[]
+}
+
+model rooms {
+  roomid             Int                  @id
+  roomtype           room_type?
+  location           String?              @db.VarChar(255)
+  capacity           Int?
+  currentstatus      room_status?
+  assignednurse      Int?
+  equipmentinstances equipmentinstances[]
+  nurses             nurses?              @relation(fields: [assignednurse], references: [nurseid], onDelete: NoAction, onUpdate: NoAction, map: "rooms_assinednurse_fkey")
+  roomshistory       roomshistory[]
+}
+
+model roomshistory {
+  historyid Int                   @id
+  roomid    Int?
+  startdate DateTime?             @db.Date
+  enddate   DateTime?             @db.Date
+  usagetype room_occupation_type?
+  patientid String?               @db.VarChar
+  notes     String?
+  patients  patients?             @relation(fields: [patientid], references: [phonenumber], onDelete: NoAction, onUpdate: NoAction)
+  rooms     rooms?                @relation(fields: [roomid], references: [roomid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+enum dosage {
+  Tablet
+  Capsule
+  Liquid
+  Injection
+  Ointment
+}
+
+enum room_occupation_type {
+  PatientOccupancy
+  Maintenance
+  Other
+}
+
+enum room_status {
+  Occupied
+  Vacant
+  UnderMaintenance
+}
+
+enum room_type {
+  General
+  ICU
+  Surgery
+  Private
+  Others
+}
+
+enum status {
+  ACTIVE
+  SUSPENDED
+  INACTIVE
+}

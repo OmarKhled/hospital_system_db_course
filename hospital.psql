@@ -1,0 +1,127 @@
+CREATE TYPE STATUS AS ENUM ('ACTIVE', 'SUSPENDED', 'INACTIVE');
+
+-- Patients
+CREATE TABLE Patients (
+  PhoneNumber VARCHAR PRIMARY KEY,
+  Name VARCHAR,
+  City VARCHAR,
+  Address VARCHAR,
+  Sex VARCHAR,
+  Age INT
+);
+
+-- Departments
+CREATE TABLE Departments (
+  ID INT PRIMARY KEY,
+  Name VARCHAR
+)
+
+-- Employees
+CREATE TABLE Employees (
+  ID INT PRIMARY KEY,
+  Name VARCHAR,
+  Phone VARCHAR,
+  Address VARCHAR,
+  Status STATUS,
+  JoinDate DATE
+);
+
+-- Doctors
+CREATE TABLE Doctors (
+  DoctorId INT PRIMARY KEY,
+  Specialty VARCHAR,
+  DepartmentID INT,
+  FOREIGN KEY (DepartmentID) REFERENCES Departments(ID)
+) INHERITS (Employees);
+
+-- Nurses
+CREATE TABLE Nurses (
+  NurseId INT PRIMARY KEY,
+  Certification VARCHAR,
+  DepartmentID INT,
+  FOREIGN KEY (DepartmentID) REFERENCES Departments(ID)
+) INHERITS (Employees);
+
+-- Receptionist
+CREATE TABLE Receptionists (
+  ReceptionistId INT PRIMARY KEY,
+  DeskLocation VARCHAR
+) INHERITS (Employees);
+
+-- Medical Records
+CREATE TABLE MedicalRecords (
+  RecordID INT PRIMARY KEY,
+  PatientID VARCHAR,
+  DateOfVisit DATE,
+  Symptoms TEXT,
+  Diagnosis TEXT,
+  Treatment TEXT,
+  AttendingDoctorID INT,
+  ReceptionistID INT,
+  Notes TEXT,
+  FOREIGN KEY (PatientID) REFERENCES Patients(PhoneNumber),
+  FOREIGN KEY (AttendingDoctorID) REFERENCES Doctors(DoctorId),
+  FOREIGN KEY (ReceptionistID) REFERENCES Receptionists(ReceptionistId)
+);
+
+CREATE TYPE DOSAGE AS ENUM('Tablet', 'Capsule', 'Liquid', 'Injection', 'Ointment')
+
+-- Medicine Table
+CREATE TABLE Medicine (
+  Code VARCHAR(8) PRIMARY KEY,
+  Name VARCHAR,
+  Price DECIMAL(10, 2),
+  Description TEXT,
+  DosageType DOSAGE 
+);
+
+CREATE TABLE Pharmacy (
+  ListingId INT PRIMARY KEY,
+  MedicineId VARCHAR(8),
+  Quantity INT,
+  DateOfPurchase DATE,
+  ExpiryDate DATE,
+  StorageInstructions TEXT,
+  FOREIGN KEY (MedicineId) REFERENCES Medicine(Code)
+);
+
+CREATE TYPE ROOM_STATUS AS ENUM('Occupied', 'Vacant', 'UnderMaintenance');
+CREATE TYPE ROOM_TYPE AS ENUM('General', 'ICU', 'Surgery', 'Private', 'Others');
+
+CREATE TABLE Rooms (
+  RoomID INT PRIMARY KEY,
+  RoomType ROOM_TYPE, -- Enumerate as needed
+  Location VARCHAR(255),
+  Capacity INT,
+  CurrentStatus ROOM_STATUS,
+  AssignedNurse INT,
+  FOREIGN KEY (AssignedNurse) REFERENCES Nurses(NurseID)
+);
+
+CREATE TYPE ROOM_OCCUPATION_TYPE AS ENUM('PatientOccupancy', 'Maintenance', 'Other');
+
+
+CREATE TABLE RoomsHistory (
+  HistoryID INT PRIMARY KEY,
+  RoomID INT,
+  StartDate DATE,
+  EndDate DATE,
+  UsageType ROOM_OCCUPATION_TYPE,
+  PatientID VARCHAR,
+  Notes TEXT,
+  FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID),
+  FOREIGN KEY (PatientID) REFERENCES Patients(PhoneNumber)
+);
+
+CREATE TABLE Equipments (
+   Code VARCHAR PRIMARY KEY,
+   Price DECIMAL(10, 2),
+   Description VARCHAR
+);
+
+CREATE TABLE EquipmentInstances (
+  EquipmentID VARCHAR PRIMARY KEY,
+  RoomID INT,
+  FOREIGN KEY (EquipmentID) REFERENCES Equipments(Code),
+  FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID)
+);
